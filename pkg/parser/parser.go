@@ -117,7 +117,7 @@ func (p *Parser) parseAssignStmt() (ast.Stmt, error) {
 	}
 
 	tokenType := p.currentToken().Type
-	
+
 	switch tokenType {
 	case lexer.ASSIGN:
 		p.advance()
@@ -130,7 +130,7 @@ func (p *Parser) parseAssignStmt() (ast.Stmt, error) {
 			Value:    value,
 			Position: pos,
 		}, nil
-		
+
 	case lexer.PLUS_ASSIGN:
 		p.advance()
 		value, err := p.parseExpr()
@@ -143,7 +143,7 @@ func (p *Parser) parseAssignStmt() (ast.Stmt, error) {
 			Value:    value,
 			Position: pos,
 		}, nil
-		
+
 	case lexer.MINUS_ASSIGN:
 		p.advance()
 		value, err := p.parseExpr()
@@ -156,7 +156,7 @@ func (p *Parser) parseAssignStmt() (ast.Stmt, error) {
 			Value:    value,
 			Position: pos,
 		}, nil
-		
+
 	default:
 		return nil, fmt.Errorf("expected assignment operator, got %s at line %d", tokenType, p.currentToken().Line)
 	}
@@ -354,7 +354,6 @@ func (p *Parser) parseFuncDef() (ast.Stmt, error) {
 		return nil, err
 	}
 
-	fmt.Printf("func:%s stmts length:%d\n", name, len(body))
 	return &ast.FuncDef{
 		Name:     name,
 		Args:     args,
@@ -385,7 +384,7 @@ func (p *Parser) parseReturnStmt() (ast.Stmt, error) {
 func (p *Parser) parsePassStmt() (ast.Stmt, error) {
 	pos := ast.Position{Line: p.currentToken().Line, Column: p.currentToken().Column}
 	p.advance() // consume 'pass' token
-	
+
 	return &ast.PassStmt{
 		Position: pos,
 	}, nil
@@ -413,7 +412,7 @@ func (p *Parser) parseBlock() ([]ast.Stmt, error) {
 	if p.currentToken().Type == lexer.DEDENT {
 		p.advance()
 	} else if p.currentToken().Type != lexer.EOF {
-		return nil, fmt.Errorf("expected DEDENT or EOF, got %s at line %d", 
+		return nil, fmt.Errorf("expected DEDENT or EOF, got %s at line %d",
 			p.currentToken().Type, p.currentToken().Line)
 	}
 

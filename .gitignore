@@ -4,9 +4,9 @@
 # Binaries
 # --------
 # Main executables
-py2c
-py2vm
-astprint
+/py2c
+/py2vm
+/astprint
 
 # Test binaries
 py2c_for_test
